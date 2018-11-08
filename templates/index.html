@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Consilium</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<style>
+.modal-backdrop {
+   background-image: url(/static/cs.jpg);
+   background-size:100%;
+   height:100%;
+
+}
+.mytext{
+    border:0;padding:10px;background:whitesmoke; float:right;
+}
+.text{
+    width:50%;display:flex;flex-direction:column; background:whitesmoke; border-radius:25px; padding:15px;
+}
+.text > p:first-of-type{
+    width:100%;margin-top:0;margin-bottom:auto;line-height: 20px;font-size: 12px; padding:0 0; float:right;
+}
+.text > p:last-of-type{
+    width:100%;text-align:right;color:silver;margin-bottom:-7px;margin-top:auto; padding:0 ; float:right; 
+}
+.text-l{
+    float:left;padding-left:10px;text-align:left-end; 
+}        
+.text-r{
+    float:right;
+	padding-right:10px;
+	text-align:right-end;
+}
+.avatar ul.li{
+    display:flex;
+	float:right;
+    align-items:center;
+    width: calc(100% - 25px);
+    //float:left;
+    padding-right:10px 20px; 
+}
+
+.macro{
+    margin-top:5px;width:100%;border-radius:5px;padding:5px;display:flex; float:right;
+}
+.msj-rta .text-r {
+    
+	background:#9c27b0;
+	padding:15px;
+	border-radius: 25px;
+	
+	
+}
+.msj text-l{
+    float:left;background:#9c27b0;
+}
+.frame {
+    background:#e0e0de;
+    height:450px;
+    overflow:hidden;
+    padding:0 0;
+}
+.frame > div:last-of-type{
+    position:absolute;bottom:0;width:100%;display:flex;
+}
+body > div > div > div:nth-child(2) > span{
+    background: whitesmoke;padding: 10px;font-size: 21px;border-radius: 50%;
+}
+body > div > div > div.msj-rta.macro{
+    margin:auto;margin-left:1%;
+	
+}
+
+
+.msj:before{
+    width: 0;
+    height: 0;
+    content:"";
+    top:-5px;
+    left:-14px;
+    position:relative;
+    border-style: solid;
+    border-width: 0 13px 13px 0;
+    border-color: transparent white transparent transparent;   
+    float:right;	
+}
+.msj-rta:after{
+    width: 0;
+    height: 0;
+    content:"";
+    top:-5px;
+    left:14px;
+    position:relative;
+    border-style: solid;
+    border-width: 0px 13px 0 0;
+    border-color: #9c27b0 transparent transparent transparent;           
+}  
+input:focus{
+    outline: none;
+}        
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #d4d4d4;
+}
+::-moz-placeholder { /* Firefox l19+ */
+    color: #d4d4d4;
+}
+:-ms-input-placeholder { /* IE 10+ */
+    color: #d4d4d4;
+}
+:-moz-placeholder { /* Firefox 18- */
+    color: #d4d4d4;
+}
+
+.userText span {
+    background-color: #9c27b0;
+    padding: 10px;
+    border-radius: 2px;
+    
+left: 15px;
+}
+.center {
+    position: absolute;
+    width: 100px;
+    height: 50px;
+    top: 50%;
+    left: 45%;
+    margin-top: -25px;
+    margin-left: -50px;
+}
+.btn-circle {
+  background-color: white;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.42;
+  border-radius: 30px;
+  
+}
+
+
+
+#modal-body::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+#modal-body::-webkit-scrollbar
+{
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+#modal-body::-webkit-scrollbar-thumb
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}
+.wrap {
+    width: 500px;
+    height: 400px;
+    padding: 0;
+    overflow: hidden;
+}
+.frame {
+    width: 1280px;
+    height: 800px;
+    border: 0;
+    -ms-transform: scale(0.25);
+    -moz-transform: scale(0.25);
+    -o-transform: scale(0.25);
+    -webkit-transform: scale(0.25);
+    transform: scale(0.25);
+ 
+    -ms-transform-origin: 0 0;
+    -moz-transform-origin: 0 0;
+    -o-transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+}
+#share-buttons img {
+
+width: 35px;
+
+padding: 2px;
+
+border: 0;
+
+box-shadow: 0;
+
+display: inline;
+
+float:right;
+
+margin:5px;
+}
+
+
+
+
+</style>
+
+</head>
+<body style="background-image: url(/static/cs.jpg);background-size:100%;">
+<div class="center"></div>
+<div class="container">
+
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-circle" id="myBtn" style=" position:fixed;
+    bottom:0px;
+    right:0px;
+    margin:0px;
+"><img class="img-circle" style="width:100%;" src="/static/NewBot.png"/></button>
+ <!-- Login Modal -->
+ 
+<div id="loginModal" class="modal fade" role="dialog">
+  <div class="modal-dialog"  style =" overflow-y: auto; float:right; top:350px; bottom:0px; width: 25%;">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" style="background-color:skyblue; color:white;">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Login</h4>
+      </div>
+      <div class="modal-body">
+       <form id="signin" class="navbar-form navbar-right" role="form">
+                        <div class="input-group">
+ 
+  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            
+<input id="username" type="email" class="form-control" name="email" value="" placeholder="User name">                                        
+                        </div>
+
+                        
+<div class="input-group">
+                            
+<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            
+<input id="password" type="password" class="form-control" name="password" value="" placeholder="Password">                                        
+                        </div>
+
+                        
+
+                   </form>
+      </div>
+      <div class="modal-footer">
+        <input type="button" name="login_btn" id="login_btn" class="btn btn-primary" value="Login"/>
+      </div>
+    </div>
+
+  </div>
+</div>
+    </div>
+  <!-- Login Modal ends -->
+  
+  <!-- Email-modal starts -->
+  
+ <div id="EmailModal" class="modal fade" role="dialog">
+  <div class="modal-dialog"  style =" overflow-y: auto; float:right; top:100px; bottom:0px; width: 25%;">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" style="background-color:skyblue; color:black;">
+        <button type="button" class="close" data-dismiss="modal"><a href="#myModal" data-toggle="modal">&times;</a></button>
+        <h4 class="modal-title">Email</h4>
+      </div>
+      <div class="modal-body">
+       <form id="contact" action="" method="post">
+	   <h6> <b> Email From </b> </h6>
+	   <fieldset>
+      <input placeholder="Type your mail" type="text" tabindex="1" required autofocus>
+    </fieldset> 
+ 
+                        
+<form id="contact" action="" method="post">
+<h6> <b> Email To </b> </h6>
+	   <fieldset>
+      <input placeholder="Type your mail" type="text" tabindex="1" required autofocus>
+    </fieldset>
+   <!--	<h6> <b> cc </b> </h6>
+    <fieldset>
+      <input placeholder="Type your mail" type="email" tabindex="2" required>
+    </fieldset>
+	<h6> <b> Subject </b> </h6>
+    <fieldset>
+      <input placeholder="Subject" type="tel" tabindex="3" required>
+    </fieldset> -->
+    <h6><b> Message </b> </h6>
+    <fieldset>
+      <textarea placeholder="Message..." tabindex="4" required></textarea>
+    </fieldset>
+    <fieldset>       
+
+                   </form>
+				  
+	  
+      </div>
+      <div class="modal-footer">
+	  
+	  <a href="#" style="float:left" class="btn btn-primary">
+          <span class="glyphicon glyphicon-paperclip"></span> Attachment
+        </a>
+        <input type="button" name="send_btn" id="submit_btn" class="btn btn-primary" value="Send"/>
+      </div>
+    </div>
+
+  </div>
+</div>
+    </div>
+	<!-- Email Modal ends -->
+	
+  <!--  Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog" style =" overflow-y: auto; float:right; top:-20px; bottom:-30px; width: 45%;">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="background:lightblue;border-radius: 5px;">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" ><img class="img-circle" src="/static/NewBotF.png"/><b>   Consilium</b></h4>
+        </div>
+        <div class="modal-body1" style=" height: 478px; overflow-y: auto;background-color:white;">
+         
+<div id="chatbox"> 
+
+<p class="botText"><span><img class="img-circle" src="/static/NewBotF.png"/><span id="text" style="font-style:italic; background:whitesmoke; width:20px; border-radius:4px;"></span></span></p>
+
+
+
+
+        </div>
+
+               </div>
+        <div class="modal-footer">
+
+ <div id="userInput">
+<div class="speech" style="width:100%";>
+
+            <input id="textInput"   type="text" placeholder="Type something.." style ="width:85%;background-color:whitesmoke;" />
+ 
+ <img style ="cursor: pointer" title="Listening.." onclick="startDictation()" src="/static/micN.png" />
+ 
+<!--This is a comment. Comments are not displayed in the browser -->
+
+ <a href="#stop" class="glyphicon glyphicon-stop" id="buttonInput" onclick="stopvoice()">             
+        </a>  
+		
+</div>
+</div>
+       </div>
+      </div>
+      
+    </div>
+  </div>
+  </div>
+
+
+ <!-- #DSO -->
+<center><div class="modal fade" id="modal-2" style="display:none;">
+ <div class="modal-dialog" style =" width: 80%;
+  height: 100%;
+  margin: 0;
+  padding: 0;">
+    
+      <!-- Modal content-->
+      <div class="modal-content" style = " height: auto;
+  min-height: 100%;
+  border-radius: 0;">
+        <div class="modal-header" style="background:lightblue;border-radius: 5px;">
+<button type="button" class="close" data-dismiss="modal"><a href="#myModal" data-toggle="modal" data-dismiss="modal">&times;</a></button>
+                  <h4 class="modal-title" style = "float:left;" ><img class="img-circle"  src="/static/NewBotF.png"/>Consilium</h4>
+
+        </div>
+   
+      <div class="modal-body" style =" width: 100%;
+  height: 560px;
+  margin: 0;
+  padding: 0;">
+
+   
+        <iframe src='http://4technologies.in/' style='border:none;width:100%;height:100%;'></iframe>
+                 
+      <div class="modal-footer">
+
+ <div class="speech" style="width:100%";>
+
+ 
+ <img style ="cursor: pointer" title="Listening.." onclick="startDictation()" src="/static/micN.png" />
+ 
+</div>
+
+       </div>
+   
+      </div>
+     
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div></center><!-- /.modal -->
+
+
+
+ <!-- #SaleMargin -->
+<center><div class="modal fade" id="modal-3" style="display:none;">
+ <div class="modal-dialog" style =" width: 80%;
+  height: 100%;
+  margin: 0;
+  padding: 0;">
+    
+      <!-- Modal content-->
+      <div class="modal-content" style = " height: auto;
+  min-height: 100%;
+  border-radius: 0;">
+        <div class="modal-header" style="background:lightblue;border-radius: 5px;">
+<button type="button" class="close" data-dismiss="modal"><a href="#myModal" data-toggle="modal" data-dismiss="modal">&times;</a></button>
+                  <h4 class="modal-title" style = "float:left;" ><img class="img-circle"  src="/static/NewBotF.png"/>Consilium</h4>
+
+        </div>
+   
+      <div class="modal-body" style =" width: 100%;
+  height: 555px;
+  margin: 0;
+  padding: 0;">
+
+   
+        <iframe src='http://localhost:4848/single/?appid=C%3A%5CUsers%5CMukund%20Kumar%5CDocuments%5CQlik%5CSense%5CApps%5CExecutive%20Dashboard.qvf&obj=fzrxtjq' style='border:none;width:100%;height:100%;'></iframe>
+    </div>              
+      <div class="modal-footer">
+
+ <div class="speech" style="width:100%";>
+
+ 
+ <img style ="cursor: pointer" title="Listening.." onclick="startDictation()" src="/static/micN.png" />
+ 
+</div>
+
+      
+   
+      </div>
+     
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div></center><!-- /.modal -->
+
+<!-- #ProductRevenue -->
+<center><div class="modal fade" id="modal-4" style="display:none;">
+ <div class="modal-dialog" style =" width: 80%;
+  height: 100%;
+  margin: 0;
+  padding: 0;">
+    
+      <!-- Modal content-->
+      <div class="modal-content" style = " height: auto;
+  min-height: 100%;
+  border-radius: 0;">
+        <div class="modal-header" style="background:lightblue;border-radius: 5px;">
+<button type="button" class="close" data-dismiss="modal"><a href="#myModal" data-toggle="modal" data-dismiss="modal">&times;</a></button>
+                  <h4 class="modal-title" style = "float:left;" ><img class="img-circle"  src="/static/NewBotF.png"/>Consilium</h4>
+
+        </div>
+   
+      <div class="modal-body" style =" width: 100%;
+  height: 555px;
+  margin: 0;
+  padding: 0;">
+
+   
+        <iframe src='http://localhost:4848/single/?appid=C%3A%5CUsers%5CMukund%20Kumar%5CDocuments%5CQlik%5CSense%5CApps%5CExecutive%20Dashboard.qvf&obj=ZxDKp' style='border:none;width:100%;height:100%;'></iframe>
+    </div>              
+      <div class="modal-footer">
+
+ <div class="speech" style="width:100%";>
+
+ 
+ <img style ="cursor: pointer" title="Listening.." onclick="startDictation()" src="/static/micN.png" />
+ 
+</div>
+
+      
+   
+      </div>
+     
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div></center><!-- /.modal -->
+
+<!-- #CustomersOverdue -->
+<center><div class="modal fade" id="modal-5" style="display:none;">
+ <div class="modal-dialog" style =" width: 80%;
+  height: 100%;
+  margin: 0;
+  padding: 0;">
+    
+      <!-- Modal content-->
+      <div class="modal-content" style = " height: auto;
+  min-height: 100%;
+  border-radius: 0;">
+        <div class="modal-header" style="background:lightblue;border-radius: 5px;">
+<button type="button" class="close" data-dismiss="modal"><a href="#myModal" data-toggle="modal" data-dismiss="modal">&times;</a></button>
+                  <h4 class="modal-title" style = "float:left;" ><img class="img-circle"  src="/static/NewBotF.png"/>Consilium</h4>
+
+        </div>
+   
+      <div class="modal-body" style =" width: 100%;
+  height: 555px;
+  margin: 0;
+  padding: 0;">
+
+   
+        <iframe src='http://localhost:4848/single/?appid=C%3A%5CUsers%5CMukund%20Kumar%5CDocuments%5CQlik%5CSense%5CApps%5CExecutive%20Dashboard.qvf&obj=ARNmpdM' style='border:none;width:100%;height:100%;'></iframe>
+    </div>              
+      <div class="modal-footer">
+
+ <div class="speech" style="width:100%";>
+
+ 
+ <img style ="cursor: pointer" title="Listening.." onclick="startDictation()" src="/static/micN.png" />
+ 
+</div>
+
+      
+   
+      </div>
+     
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div></center><!-- /.modal -->
+
+<script>
+//avatar code starts here
+
+
+var me = {};
+me.avatar = "/static/NewBotF.png";
+var email = $("#username").val();
+var you = {};
+you.avatar = "/static/image.png";
+
+//Email code starts here
+
+
+ jQuery(document).ready(function($) {
+
+    jQuery('#share-buttons a').on('click', function(){
+
+        var width  = 575,
+
+		    height = 520,
+
+		    left   = (jQuery(window).width()  - width)  / 2,
+
+		    top    = (jQuery(window).height() - height) / 2,
+
+		    opts   = 'status=1' +
+
+		             ',width='  + width  +
+
+		             ',height=' + height +
+
+		             ',top='    + top    +
+
+		             ',left='   + left;
+
+        newwindow=window.open($(this).attr('href'),'',opts);
+
+        if (window.focus) {newwindow.focus()}
+return false;
+
+    });
+
+});
+
+
+
+function formatAMPM(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+}         
+
+function getBotResponse() {
+
+                var date = formatAMPM(new Date());
+                var rawText = $("#textInput").val();
+
+                var userHtml = 
+                         '<div><ul><li class="msj-rta macro">' +
+                            '<div class="text text-r" style="color:white; font-family:Calibri(Body); position:relative; left:190px; text-align:float:right;">' +
+                                '<p style="font-size:14px; float:right;">'+rawText+'</p>' +
+                                '<p><small>'+date+'</small></p>' +
+                            '</div>' +
+							
+							
+                        '<div class="avatar" style="padding:0px 0px 0px 10px !important; justify-content:flex-end; "><img class="img-circle" style="width:30%;justify-content:right; position:relative; TOP:auto; LEFT:192px; WIDTH:75px;" src="'+you.avatar+'" /></li></ul></div>'+'</div>' ;
+
+if(rawText == "thank you for report"){
+    $("#modal-2").modal('toggle');
+
+    $("#myModal").modal();
+}
+if(rawText == "close my report"){
+    $("#modal-3").modal('toggle');
+
+    $("#myModal").modal();
+}
+                $("#textInput").val("");
+                $("#chatbox").append(userHtml);
+  
+
+ $(".modal-body1").stop().animate({ scrollTop: $(".modal-body1")[0].scrollHeight}, 1000);
+
+
+document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+
+
+                
+
+                $.get("/get", {msg: rawText}).done(function (data) {
+
+
+ if(data == "http://4technologies.in/"){
+   $("#myModal").modal('toggle');  
+  $("#modal-2").modal();
+
+var botHtml ='<div class="msj macro">' +
+                        '<div class="avatar" style="width:18%;"><img class="img-circle" style="width:70%;" src="'+ me.avatar +'" /></div>' +
+                            '<div class="text text-l" style="font-family:Calibri (Body); text-align:float:left;">' +
+                                '<p style="font-size:14px;">Sure</p>' +
+                                '<p><small>'+date+'</small></p>' + 
+                            '</div>' +
+                        '</div>' + '<center>' +'<div class="wrap" >' + 
+                    '<iframe src="http://4technologies.in/" style="border:none;width:100%;height:100%;"></iframe>' +
+    '</div>'  +'</center>'+ '<div>'+'<a href="#modal-2" data-toggle="modal" data-dismiss="modal"><img style="margin-bottom:-60px;" class="btn btn-circle" src="/static/zoom.jpg" title="Zoom"/></a>'+'</div>'+'<div id="share-buttons">'+' <a href="#EmailModal" data-toggle="modal" data-dismiss="modal"><img src="/static/email.png" alt="Email" title="Email" /></a>'+' <a href="javascript:;" onclick="window.print()"> <img src="/static/print.png" alt="Print" title="Print" /></a>'+'</div>'
+;	
+   
+
+            }
+else if(data == "http://localhost:4848/single/?appid=C%3A%5CUsers%5CMukund%20Kumar%5CDocuments%5CQlik%5CSense%5CApps%5CExecutive%20Dashboard.qvf&obj=ZxDKp"){
+   $("#myModal").modal('toggle');  
+  $("#modal-4").modal();
+ 
+var botHtml ='<div class="msj macro">' +
+                        '<div class="avatar" style="width:18%;"><img class="img-circle" style="width:60%;" src="'+ me.avatar +'" /></div>' +
+                            '<div class="text text-l" style="font-family:Calibri (Body);  text-align:float:left;">' +
+                                '<p style="font-size:14px;">Sure</p>' +
+                                '<p><small>'+date+'</small></p>' +
+                            '</div>' +
+                        '</div>' + '<center>' +'<div class="wrap" >' + 
+                    '<iframe src="http://localhost:4848/single/?appid=C%3A%5CUsers%5CMukund%20Kumar%5CDocuments%5CQlik%5CSense%5CApps%5CExecutive%20Dashboard.qvf&obj=ZxDKp" style="border:none;width:100%;height:100%;"></iframe>' + 
+    '</div>'  +'</center>'+ '<div>'+'<a href="#modal-4" data-toggle="modal" data-dismiss="modal"><img src="/static/zoom.jpg" title="Zoom"/></a>'+'</div>';   
+   
+
+            }
+else if(data == "http://localhost:4848/single/?appid=C%3A%5CUsers%5CMukund%20Kumar%5CDocuments%5CQlik%5CSense%5CApps%5CExecutive%20Dashboard.qvf&obj=ARNmpdM"){
+   $("#myModal").modal('toggle');  
+  $("#modal-5").modal();
+ 
+var botHtml ='<div class="msj macro">' +
+                        '<div class="avatar" style="width:18%;"><img class="img-circle" style="width:60%;" src="'+ me.avatar +'" /></div>' +
+                            '<div class="text text-l" style="font-family:Calibri (Body);  text-align:float:left;">' +
+                                '<p style="font-size:14px;">Sure</p>' +
+                                '<p><small>'+date+'</small></p>' +
+                            '</div>' +
+                        '</div>' + '<center>' +'<div class="wrap" >' + 
+                    '<iframe src="http://localhost:4848/single/?appid=C%3A%5CUsers%5CMukund%20Kumar%5CDocuments%5CQlik%5CSense%5CApps%5CExecutive%20Dashboard.qvf&obj=ARNmpdM" style="border:none;width:100%;height:100%;"></iframe>' + 
+    '</div>'  +'</center>'+ '<div>'+'<a href="#modal-5" data-toggle="modal" data-dismiss="modal"><img src="/static/zoom.jpg" title="Zoom"/></a>'+'</div>';   
+   
+
+            } 				
+else if(data == "http://localhost:4848/single/?appid=C%3A%5CUsers%5CMukund%20Kumar%5CDocuments%5CQlik%5CSense%5CApps%5CExecutive%20Dashboard.qvf&obj=fzrxtjq"){
+   $("#myModal").modal('toggle');  
+  $("#modal-3").modal();
+ 
+var botHtml ='<div class="msj macro">' +
+                        '<div class="avatar" style="width:18%;"><img class="img-circle" style="width:60%;" src="'+ me.avatar +'" /></div>' +
+                            '<div class="text text-l" style="font-family:Calibri (Body);  text-align:float:left;">' +
+                                '<p style="font-size:14px;">Sure</p>' +
+                                '<p><small>'+date+'</small></p>' +
+                            '</div>' +
+                        '</div>' + '<center>' +'<div class="wrap" >' + 
+                    '<iframe src="http://localhost:4848/single/?appid=C%3A%5CUsers%5CMukund%20Kumar%5CDocuments%5CQlik%5CSense%5CApps%5CExecutive%20Dashboard.qvf&obj=fzrxtjq" style="border:none;width:100%;height:100%;"></iframe>' + 
+    '</div>'  +'</center>'+ '<div>'+'<a href="#modal-3" data-toggle="modal" data-dismiss="modal"><img src="/static/zoom.jpg" title="Zoom"/></a>'+'</div>';   
+   
+
+            }      
+else{
+                    var botHtml ='<div class="msj macro">' +
+                        '<div class="avatar" style="width:18%;"><img class="img-circle" style="width:60%;" src="'+ me.avatar +'" /></div>' +
+                            '<div class="text text-l" style="font-family:Calibri (Body);  float:left;">' +
+                                '<p style="font-size:14px;">'+ data +'</p>' +
+                                '<p><small>'+date+'</small></p>' +
+                            '</div>' +
+                        '</div>';
+ var myTimeout;
+    function myTimer() {
+       window.speechSynthesis.pause();
+        window.speechSynthesis.resume();
+       myTimeout = setTimeout(myTimer, 10000); 
+     }
+  window.speechSynthesis.cancel();
+        myTimeout = setTimeout(myTimer, 10000);
+  
+                 
+                var u1 = new SpeechSynthesisUtterance(data);
+                u1.lang = 'en-US';
+                u1.pitch = 1;
+                u1.rate = 1;
+               // u1.voice = voices[10];
+                u1.voiceURI = 'native';
+                u1.volume = 1;
+                u1.voice = speechSynthesis.getVoices().filter(function(voice) {
+    return voice.name == "Google UK English Female"
+
+   })[0];
+   u1.onend =  function() { clearTimeout(myTimeout); }
+        window.speechSynthesis.speak(u1); 
+
+                // speechSynthesis.speak(u1);
+                 
+           
+}
+        
+                    $("#chatbox").append(botHtml);
+$(".modal-body1").stop().animate({ scrollTop: $(".modal-body1")[0].scrollHeight}, 1000);
+
+
+                    document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+
+                });
+            }
+           
+		  
+
+            $("#textInput").keypress(function (e) {
+
+                if (e.which == 13) {
+
+                      getBotResponse();
+                       $("#modal-2").modal("hide");
+                }
+            });
+     /*      $("#buttonInput").click(function () {
+            getBotResponse();
+				
+			 $("#modal-2").modal("hide"); 
+     }); */
+			
+			
+
+
+
+//modal invoke
+
+$(document).ready(function(){
+    $("#myBtn").click(function(){
+        $("#loginModal").modal();
+       
+    });
+ 
+   
+});
+
+ $("#login_btn").keypress(function (e) {
+
+                if (e.which == 13) {
+
+                    var email = $("#username").val();
+var pwd = $("#password").val();
+if(email != "" && pwd != ""){
+$('#loginModal').modal('hide');
+
+getWelcomeMessage();
+}else{
+ alert("Both fields are required!");
+}
+                }
+            });
+			
+			
+
+$("#login_btn").click(function(){
+var email = $("#username").val();
+var pwd = $("#password").val();
+if(email != "" && pwd != ""){
+$('#loginModal').modal('hide');
+
+getWelcomeMessage();
+}else{
+ alert("Both fields are required!");
+}
+});
+ function getWelcomeMessage(){
+var email = $("#username").val();
+$('#myModal').modal('show');
+document.getElementById("text").innerHTML = "<b>"+"Hi "+email +"! &#x270B; I am Consilium, How can I help you?"+"</b>";
+ var u1 = new SpeechSynthesisUtterance("Welcome " + email + " i am consilium,how can i help u");
+                u1.lang = 'en-US';
+                u1.pitch = 1;
+                u1.rate = 1;
+                //u1.voice = voices[10];
+                u1.voiceURI = 'native';
+                u1.volume = 1;
+                u1.voice = speechSynthesis.getVoices().filter(function(voice) {
+    return voice.name == "Google UK English Female" 
+
+  })[0]; 
+   window.speechSynthesis.speak(u1);
+}
+
+<!-- HTML5 Speech Recognition API -->
+
+ function startDictation() {
+ window.speechSynthesis.cancel();
+    if (window.hasOwnProperty('webkitSpeechRecognition')) {
+
+      var recognition = new webkitSpeechRecognition();
+
+      recognition.continuous = false;
+      recognition.interimResults = false;
+	 
+      recognition.lang = "en-US";
+	  recognition.start();
+ 
+	  recognition.onresult = function(e) {
+       document.getElementById('textInput').value
+                      = e.results[0][0].transcript;
+					
+      
+       					 
+		recognition.stop();
+	//document.getElementById('textInput').submit();
+		getBotResponse();
+
+		
+     };
+ recognition.onerror = function(e) {
+     recognition.stop();
+     }
+
+    }
+  };
+  
+ 
+</script>
+ <script>
+ 
+ document.getElementById('buttonInput').addEventListener('click', function(event) {
+          event.preventDefault();
+
+          window.speechSynthesis.cancel();
+		  recognition.stop();
+          log.innerHTML = 'Speaker stopped' + '<br />' + log.innerHTML;
+        });
+/*var x = document.getElementById("myAudio"); 
+
+
+function playAudio() { 
+    x.play(); 
+} 
+
+function pauseAudio() { 
+    x.pause();  
+}  */
+</script>
+</body>
+</html>

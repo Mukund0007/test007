@@ -1,0 +1,33 @@
+.main-section{
+  width: 300px;
+  position: fixed;
+  right:50px;
+  bottom:-350px;
+border-radius: 25px;
+}
+
+.first-section:hover{
+  cursor: pointer;
+}
+.open-more{
+  bottom:0px;
+  transition:2s;
+}
+.border-chat{
+  border:1px solid #DCDCDC;
+border-radius: 10px
+  margin: 0px;
+}
+.first-section{
+  background-color:#6495ED;
+border-radius: 10px
+}
+.first-section p{
+  color:black;
+  margin:0px;
+  padding: 10px 0px;
+border-radius: 25px;
+}
+.first-section p:hover{
+  color:white;
+  cursor: pointer;

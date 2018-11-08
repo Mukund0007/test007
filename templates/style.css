@@ -1,0 +1,150 @@
+body {
+    background-color:white;
+    font-family: Garamond;
+     margin:0;padding:0;
+}
+
+.main-section{
+  width: 300px;
+  position: fixed;
+  right:50px;
+  bottom:-350px;
+border-radius: 25px;
+}
+.first-section:hover{
+  cursor: pointer;
+}
+
+.open-more{
+  bottom:0px;
+  transition:2s;
+}
+
+.border-chat{
+  border:1px solid #DCDCDC;
+border-radius: 10px
+  margin: 0px;
+}
+
+.first-section{
+  background-color:#6495ED;
+border-radius: 10px
+}
+
+.first-section p{
+  color:black;
+  margin:0px;
+  padding: 10px 0px;
+border-radius: 25px;
+}
+
+.first-section p:hover{
+  color:white;
+  cursor: pointer;
+}
+
+.right-first-section{
+   text-align: right;
+}
+.right-first-section i{
+  color:black;
+  font-size: 15px;
+  padding: 12px 3px;
+}
+.right-first-section i:hover{
+  color:black;
+}
+h1 {
+    color: black;
+    margin-bottom: 0;
+    margin-top: 0;
+    text-align: center;
+    font-size: 40px;
+}
+
+
+h3 {
+    color: black;
+    font-size: 20px;
+    margin-top: 3px;
+    text-align: center;
+}
+
+#chatbox {
+ padding: 0px;
+  margin: 0px;
+height: 300px;
+
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    margin-top: 60px;
+}
+
+#userInput {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    margin-top: 20px;
+}
+
+#textInput {
+    width: 90%;
+    border: none;
+    border-bottom: whitesmoke;
+    font-family: monospace;
+    font-size: 17px;
+}
+
+#buttonInput {
+    padding: 3px;
+    font-family: monospace;
+    font-size: 17px;
+}
+
+.userText {
+    color: black;
+    font-family: monospace;
+    font-size: 15px;
+    text-align: right;
+    line-height: 30px;
+}
+
+.userText span {
+    background-color: white;
+    padding: 10px;
+    border-radius: 2px;
+    
+left: 45px;
+}
+
+.botText {
+    color: black;
+    font-family: monospace;
+    font-size: 10px;
+    text-align: right;
+    line-height: 5px;
+}
+
+
+
+.botText span {
+position: absolute;
+left: 1px;
+    background-color: white;
+    padding: 1px;
+    margin: 0px;
+    
+float:right;
+  width:80%;
+  margin-bottom:20px;
+
+    border-radius: 2px;
+}
+
+#tidbit {
+    position:absolute;
+    bottom:0;
+    right:0;
+    width: 300px;
+}
